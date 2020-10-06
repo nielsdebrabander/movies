@@ -1,3 +1,11 @@
 <?php
 
-require_once __DIR__ . '/../src/app.php';
+// General variables
+$basePath = __DIR__ . '/../';
+
+
+// Data
+
+
+// View
+require_once $basePath . 'resources/templates/pages/index.php';
