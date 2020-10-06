@@ -66,8 +66,8 @@
                             </li>
                             <li><a><i class="fa fa-table"></i> Clients <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="/clients">Clients</a></li>
-                                    <li><a href="#">Contacts</a></li>
+                                    <li><a href="/companies.php">Companies</a></li>
+                                    <li><a href="/companies.php">Contacts</a></li>
                                 </ul>
                             </li>
                         </ul>

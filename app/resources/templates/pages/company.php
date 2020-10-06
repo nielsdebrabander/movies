@@ -196,88 +196,44 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Companies & <contact></contact></h3>
+                        <h3>Company title</h3>
                     </div>
 
-                    <div class="title_right">
-                        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                            <form method="get">
 
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="term" placeholder="Search for...">
-                                <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                            </div>
-                            </form>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="clearfix"></div>
 
-                <div class="row" style="display: block;">
+                <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Companies</h2>
+                                <h2>Company title</h2>
                                 <div class="clearfix"></div>
                             </div>
-
                             <div class="x_content">
+                                <dl>
+                                    <dt>Name</dt>
+                                    <dd></dd>
 
-                                <div class="row mb-3">
-                                    <div class="col-sm-9">
-                                        <p>This is an overview of all our companies</p>
-                                    </div>
-                                </div>
+                                    <dt>Address</dt>
+                                    <dd></dd>
 
-                                <div class="table-responsive">
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <thead>
-                                        <tr class="headings">
-                                            <th>
-                                                <input type="checkbox" id="check-all" class="flat">
-                                            </th>
-                                            <th class="column-title">Name</th>
-                                            <th class="column-title">Address</th>
-                                            <th class="column-title">Zip</th>
-                                            <th class="column-title">City</th>
-                                            <th class="column-title">VAT</th>
-                                            <th class="column-title">Activity</th>
-                                            <th class="column-title no-link last"><span class="nobr">Action</span>
-                                            </th>
-                                            <th class="bulk-actions" colspan="7">
-                                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
-                                                    <span class="action-cnt"> </span> ) <i
-                                                            class="fa fa-chevron-down"></i></a>
-                                            </th>
-                                        </tr>
-                                        </thead>
+                                    <dt>Zip</dt>
+                                    <dd></dd>
 
-                                        <tbody>
-                                        <?php if (count($companies)) { ?>
-                                            <?php foreach ($companies as $counter => $company) { ?>
-                                                <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
-                                                    <td class="a-center ">
-                                                        <input type="checkbox" class="flat" name="table_records">
-                                                    </td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" last"><a href="#">View</a>
-                                                    </td>
-                                                </tr>
-                                            <?php } ?>
-                                        <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    <dt>City</dt>
+                                    <dd></dd>
 
+                                    <dt>Address</dt>
+                                    <dd></dd>
 
+                                    <dt>VAT</dt>
+                                    <dd></dd>
+
+                                    <dt>Activity</dt>
+                                    <dd></dd>
+                                </dl>
                             </div>
                         </div>
                     </div>
@@ -285,7 +241,6 @@
             </div>
         </div>
         <!-- /page content -->
-
 
         <!-- footer content -->
         <footer>
