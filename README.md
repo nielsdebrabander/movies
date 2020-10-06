@@ -9,6 +9,8 @@ A fictional application that will be created, step by step, during the labo mome
 
 Good code is consistent code, in both idea as style.
 
+Keep the code-style in mind, see https://p.cygnus.cc.kuleuven.be/webapps/blackboard/content/listContentEditable.jsp?content_id=_28573009_1&course_id=_983469_1&mode=reset.
+
 
 # Infrastructure
 
