@@ -238,8 +238,8 @@
                                         </thead>
 
                                         <tbody>
-                                        <?php if (count($companies)): ?>
-                                            <?php foreach ($companies as $counter => $company): ?>
+                                        <?php if (count($companies)) { ?>
+                                            <?php foreach ($companies as $counter => $company) { ?>
                                                 <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
                                                     <td class="a-center ">
                                                         <input type="checkbox" class="flat" name="table_records">
@@ -253,8 +253,8 @@
                                                     <td class=" last"><a href="#">View</a>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                        <?php endif; ?>
+                                            <?php } ?>
+                                        <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
