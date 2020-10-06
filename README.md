@@ -62,3 +62,18 @@ After any commit, you'll push the code to the repo
 ```
 git push -u origin master
 ```
+
+### Keep up-to-date
+As you will create a fork, you'll need to sync the changes in this repo too.
+
+```
+git remote add upstream git@git.ikdoeict.be:pieter.vanpeteghem/odisee-helpdesk.git
+git fetch upstream
+git merge upstream/master master
+```
+
+If you're certain that your local changes aren't what they should be, you can
+
+```
+git rebase upstream/master
+```
