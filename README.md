@@ -33,17 +33,13 @@ This repository is your base or goto place for the original codebase and any upd
 
 Keep yourself in sync with this repo
 
-### Steps
-
-**Account**
-
+### Account
 Make sure you have an account for git.ikdoeict.be.
 
-**Fork**
-
+### Fork
 Fork this repo as an own project. You'll find a link on https://git.ikdoeict.be/pieter.vanpeteghem/odisee-helpdesk
 
-**Commit and push**
+### Commit and push
 
 We're not pushing you to use the command line. A GUI, like Sourcetree, can help you very well.
 
