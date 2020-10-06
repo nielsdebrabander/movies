@@ -29,6 +29,12 @@ If there is a need to use or so something with PHP, you'll need to use the php t
 docker-compose exec php-web bash
 ```
 
+Once you're in you can use the bin/console
+
+```
+php bin/console
+```
+
 ## GIT
 
 This repository is your base or goto place for the original codebase and any updates for the future labos.
