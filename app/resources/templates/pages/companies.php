@@ -262,12 +262,12 @@
                                                     <td class="a-center ">
                                                         <input type="checkbox" class="flat" name="table_records">
                                                     </td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
-                                                    <td class=" "></td>
+                                                    <td class=" "><?php echo htmlentities($company['name'])?></td>
+                                                    <td class=" "><?php echo htmlentities($company['address'])?></td>
+                                                    <td class=" "><?php echo htmlentities($company['zip'])?></td>
+                                                    <td class=" "><?php echo htmlentities($company['city'])?></td>
+                                                    <td class=" "><?php echo htmlentities($company['vat'])?></td>
+                                                    <td class=" "><?php echo htmlentities($company['activity'])?></td>
                                                     <td class=" last"><a href="#">View</a>
                                                     </td>
                                                 </tr>
