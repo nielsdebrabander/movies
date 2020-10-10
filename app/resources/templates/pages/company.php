@@ -208,33 +208,32 @@
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Company title</h2>
+                                <h2><?php echo $companyObject->getName() ?></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->getName() ?></dd>
 
                                     <dt>Address</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->formatAddress() ?></dd>
 
                                     <dt>Zip</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->getZip() ?></dd>
 
                                     <dt>City</dt>
-                                    <dd></dd>
-
-                                    <dt>Address</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->getCity() ?></dd>
 
                                     <dt>VAT</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->getVat() ?></dd>
 
                                     <dt>Activity</dt>
-                                    <dd></dd>
+                                    <dd><?php echo $companyObject->getActivity() ?></dd>
                                 </dl>
+
                             </div>
+
                         </div>
                     </div>
                 </div>

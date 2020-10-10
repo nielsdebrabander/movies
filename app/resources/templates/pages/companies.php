@@ -256,22 +256,23 @@
                                         </thead>
 
                                         <tbody>
-                                        <?php if (count($companies)) { ?>
-                                            <?php foreach ($companies as $counter => $company) { ?>
+                                        <?php if (count($companies) && count($companyObject)) { ?>
+                                            <?php foreach ($companyObject as $counter => $company) { ?>
                                                 <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
                                                     <td class="a-center ">
                                                         <input type="checkbox" class="flat" name="table_records">
                                                     </td>
-                                                    <td class=" "><?php echo htmlentities($company['name'])?></td>
-                                                    <td class=" "><?php echo htmlentities($company['address'])?></td>
-                                                    <td class=" "><?php echo htmlentities($company['zip'])?></td>
-                                                    <td class=" "><?php echo htmlentities($company['city'])?></td>
-                                                    <td class=" "><?php echo htmlentities($company['vat'])?></td>
-                                                    <td class=" "><?php echo htmlentities($company['activity'])?></td>
-                                                    <td class=" last"><a href="#">View</a>
-                                                    </td>
+                                                    <td class=" "><?php echo $company->getName() ?></td>
+                                                    <td class=" "><?php echo $company->formatAddress() ?></td>
+                                                    <td class=" "><?php echo $company->getZip() ?></td>
+                                                    <td class=" "><?php echo $company->getCity() ?></td>
+                                                    <td class=" "><?php echo $company->getVat() ?></td>
+                                                    <td class=" "><?php echo $company->getActivity() ?></td>
+                                                    <td class=" last"><a href="./company.php?search=<?php echo $company->getName() ?>">View</a></td>
                                                 </tr>
                                             <?php } ?>
+                                        <?php } else { ?>
+                                        <?php echo 'Geen bedrijven gevonden voor zoekterm "' . $_GET['term'] . '"'; ?>
                                         <?php } ?>
                                         </tbody>
                                     </table>
