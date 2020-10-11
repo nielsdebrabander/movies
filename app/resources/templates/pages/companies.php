@@ -203,12 +203,12 @@
                         <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                             <form method="get">
 
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="term" placeholder="Search for...">
-                                <span class="input-group-btn">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="term" placeholder="Search for...">
+                                    <span class="input-group-btn">
                       <button class="btn btn-default" type="button">Go!</button>
                     </span>
-                            </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -272,20 +272,82 @@
                                                 </tr>
                                             <?php } ?>
                                         <?php } else { ?>
-                                        <?php echo 'Geen bedrijven gevonden voor zoekterm "' . $_GET['term'] . '"'; ?>
+                                            <?php echo 'Sorry, opgegeven zoekterm heeft geen resultaten gevonden"' . $_GET['term'] . '"'; ?>
                                         <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="row" style="display: block;">
+                    <div class="col-md-12 col-sm-12  ">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2>Contacts</h2>
+                                <div class="clearfix"></div>
+                            </div>
 
+                            <div class="x_content">
+
+                                <div class="row mb-3">
+                                    <div class="col-sm-9">
+                                        <p>This is an overview of all our contacts</p>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table table-striped jambo_table bulk_action">
+                                        <thead>
+                                        <tr class="headings">
+                                            <th>
+                                                <input type="checkbox" id="check-all" class="flat">
+                                            </th>
+                                            <th class="column-title">Name</th>
+                                            <th class="column-title">Client</th>
+                                            <th class="column-title">Email</th>
+                                            <th class="column-title">Phone</th>
+                                            <th class="column-title no-link last"><span class="nobr">Action</span></th>
+                                            <th class="bulk-actions" colspan="7">
+                                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
+                                                    <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <?php if (count($contacts) && count($contactObject)) { ?>
+                                            <?php foreach ($contactObject as $counter => $contact) { ?>
+                                                <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
+                                                    <td class="a-center ">
+                                                        <input type="checkbox" class="flat" name="table_records">
+                                                    </td>
+                                                    <td class=" "><?php echo $contact->getName() ?></td>
+                                                    <td class=" "><?php echo $contact->getClient() ?></td>
+                                                    <td class=" "><?php echo $contact->getEmail() ?></td>
+                                                    <td class=" "><?php echo $contact->getPhone() ?></td>
+                                                    <td class=" last"><a href="./contact.php?search=<?php echo $contact->getName() ?>">View</a></td>
+                                                </tr>
+                                            <?php } ?>
+                                        <?php } else { ?>
+                                            <?php echo 'Sorry, geen contactpersonen gevonden "' . $_GET['term'] . '"'; ?>
+                                        <?php } ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /page content -->
+
+
+
+<!-- /page content -->
 
 
         <!-- footer content -->

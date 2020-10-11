@@ -8,16 +8,13 @@
 
     require_once $basePath . 'src/Models/Company.php';
 
-    function sorter (string $key): callable {
-        return function ($a, $b) use ($key) {
-            return strnatcmp($a[$key], $b[$key]);
-        };
+    function compare_Name($a, $b) {
+        return strnatcmp($a['name'], $b['name']);
     }
-
-    usort($companies, sorter('name'));
+    usort($companies, 'compare_Name');
 
     if (array_key_exists('term', $_GET)) {
-        $filteredTerm = '';
+        $filterTerm = '';
         $searchTerm = $_GET['term'];
         $searchTerm = strtolower($searchTerm);
 
@@ -25,158 +22,121 @@
             $char = $searchTerm[$index];
             switch ($char) {
                 case 'a':
-                    $filteredTerm .= 'a';
+                    $filterTerm .= 'a';
                     break;
-
                 case 'b':
-                    $filteredTerm .= 'b';
+                    $filterTerm .= 'b';
                     break;
-
                 case 'c':
-                    $filteredTerm .= 'c';
+                    $filterTerm .= 'c';
                     break;
-
                 case 'd':
-                    $filteredTerm .= 'd';
+                    $filterTerm .= 'd';
                     break;
-
                 case 'e':
-                    $filteredTerm .= 'e';
+                    $filterTerm .= 'e';
                     break;
-
                 case 'f':
-                    $filteredTerm .= 'f';
+                    $filterTerm .= 'f';
                     break;
-
                 case 'g':
-                    $filteredTerm .= 'g';
+                    $filterTerm .= 'g';
                     break;
-
                 case 'h':
-                    $filteredTerm .= 'h';
+                    $filterTerm .= 'h';
                     break;
-
                 case 'i':
-                    $filteredTerm .= 'i';
+                    $filterTerm .= 'i';
                     break;
-
                 case 'j':
-                    $filteredTerm .= 'j';
+                    $filterTerm .= 'j';
                     break;
-
                 case 'k':
-                    $filteredTerm .= 'k';
+                    $filterTerm .= 'k';
                     break;
-
                 case 'l':
-                    $filteredTerm .= 'l';
+                    $filterTerm .= 'l';
                     break;
-
                 case 'm':
-                    $filteredTerm .= 'm';
+                    $filterTerm .= 'm';
                     break;
-
                 case 'n':
-                    $filteredTerm .= 'n';
+                    $filterTerm .= 'n';
                     break;
-
                 case 'o':
-                    $filteredTerm .= 'o';
+                    $filterTerm .= 'o';
                     break;
-
                 case 'p':
-                    $filteredTerm .= 'p';
+                    $filterTerm .= 'p';
                     break;
-
                 case 'q':
-                    $filteredTerm .= 'q';
+                    $filterTerm .= 'q';
                     break;
-
                 case 'r':
-                    $filteredTerm .= 'r';
+                    $filterTerm .= 'r';
                     break;
-
                 case 's':
-                    $filteredTerm .= 's';
+                    $filterTerm .= 's';
                     break;
-
                 case 't':
-                    $filteredTerm .= 't';
+                    $filterTerm .= 't';
                     break;
-
                 case 'u':
-                    $filteredTerm .= 'u';
+                    $filterTerm .= 'u';
                     break;
-
                 case 'v':
-                    $filteredTerm .= 'v';
+                    $filterTerm .= 'v';
                     break;
-
                 case 'w':
-                    $filteredTerm .= 'w';
+                    $filterTerm .= 'w';
                     break;
-
                 case 'x':
-                    $filteredTerm .= 'x';
+                    $filterTerm .= 'x';
                     break;
-
                 case 'y':
-                    $filteredTerm .= 'y';
+                    $filterTerm .= 'y';
                     break;
-
                 case 'z':
-                    $filteredTerm .= 'z';
+                    $filterTerm .= 'z';
                     break;
-
                 case '0':
-                    $filteredTerm .= '0';
+                    $filterTerm .= '0';
                     break;
-
                 case '1':
-                    $filteredTerm .= 'z1';
+                    $filterTerm .= '1';
                     break;
-
                 case '2':
-                    $filteredTerm .= '2';
+                    $filterTerm .= '2';
                     break;
-
                 case '3':
-                    $filteredTerm .= '3';
+                    $filterTerm .= '3';
                     break;
-
                 case '4':
-                    $filteredTerm .= '4';
+                    $filterTerm .= '4';
                     break;
-
                 case '5':
-                    $filteredTerm .= '5';
+                    $filterTerm .= '5';
                     break;
-
                 case '6':
-                    $filteredTerm .= '6';
+                    $filterTerm .= '6';
                     break;
-
                 case '7':
-                    $filteredTerm .= '7';
+                    $filterTerm .= '7';
                     break;
-
                 case '8':
-                    $filteredTerm .= '8';
+                    $filterTerm .= '8';
                     break;
-
                 case '9':
-                    $filteredTerm .= '9';
+                    $filterTerm .= '9';
                     break;
             }
         }
-
         foreach ($companies as $company) {
             $name = $company['name'];
-
-            $pos = stripos($name, $filteredTerm);
+            $pos = stripos($name, $filterTerm);
 
             if ($pos !== false) {
-                $companyObject[] = new Company($company['name'], $company['address'], $company['zip'], $company['city'], $company['activity'], $company['vat']);
+                $companyObject[] = new Company($company['name'], $company['address'], $company['zip'], $company['city'], $company['vat'], $company['activity']);
             }
         }
     }
@@ -188,11 +148,9 @@
             $city = $company['city'];
             $activity = $company['activity'];
             $vat = $company['vat'];
-
             $companyObject[] = new Company($name, $address, $zip, $city, $activity, $vat);
         }
     }
-
     // View
     require_once $basePath . 'resources/templates/pages/companies.php';
 

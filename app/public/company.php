@@ -28,7 +28,6 @@
         $companyRecord = $companies[$key];
         $companyObject = new Company($companyRecord['name'], $companyRecord['address'], $companyRecord['zip'], $companyRecord['city'], $companyRecord['activity'], $companyRecord['vat']);
     }
-
     // View
     require_once $basePath . 'resources/templates/pages/company.php';
 

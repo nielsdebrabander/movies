@@ -56,6 +56,7 @@
                 <br/>
 
                 <!-- sidebar menu -->
+                <?php require_once $basePath . 'resources/templates/layout/parts/sidebar.php'?>
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
                         <ul class="nav side-menu">
@@ -95,6 +96,7 @@
         </div>
 
         <!-- top navigation -->
+
         <div class="top_nav">
             <div class="nav_menu">
                 <div class="nav toggle">
@@ -208,32 +210,25 @@
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo $companyObject->getName() ?></h2>
+                                <h2><?php echo $companyObject->getName()?></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo $companyObject->getName() ?></dd>
-
+                                    <dd><?php echo $companyObject->getName()?></dd>
                                     <dt>Address</dt>
-                                    <dd><?php echo $companyObject->formatAddress() ?></dd>
-
+                                    <dd><?php echo $companyObject->formatAddress()?></dd>
                                     <dt>Zip</dt>
-                                    <dd><?php echo $companyObject->getZip() ?></dd>
-
+                                    <dd><?php echo $companyObject->getZip()?></dd>
                                     <dt>City</dt>
-                                    <dd><?php echo $companyObject->getCity() ?></dd>
-
+                                    <dd><?php echo $companyObject->getCity()?></dd>
                                     <dt>VAT</dt>
-                                    <dd><?php echo $companyObject->getVat() ?></dd>
-
+                                    <dd><?php echo $companyObject->getVat()?></dd>
                                     <dt>Activity</dt>
-                                    <dd><?php echo $companyObject->getActivity() ?></dd>
+                                    <dd><?php echo $companyObject->getActivity()?></dd>
                                 </dl>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -242,6 +237,7 @@
         <!-- /page content -->
 
         <!-- footer content -->
+        <?php require_once $basePath . 'resources/templates/layout/parts/footer.php'?>
         <footer>
             <div class="pull-right">
                 Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
