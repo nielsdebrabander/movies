@@ -36,74 +36,63 @@
         <!-- sidebar -->
         <?php require_once $basePath . 'resources/templates/layout/parts/sidebar.php'?>
         <!-- /sidebar -->
-
         <!-- header -->
         <?php require_once  $basePath . 'resources/templates/layout/parts/header.php'?>
         <!-- /header -->
-
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3><?php echo $contactObject->getName()?></h3>
+                        <h3><?php echo htmlentities($contact['name']) ?></h3>
                     </div>
                 </div>
-
-                <div class="clearfix"></div>
-
+                <div class="clearfix">
+                </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo $contactObject->getName()?></h2>
+                                <h2><?php echo htmlentities($contact['name']) ?></h2>
                                 <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo $contactObject->getName()?></dd>
-
+                                    <dd><?php echo htmlentities($contact['name']) ?></dd>
                                     <dt>Client</dt>
-                                    <dd><?php echo $contactObject->getClient()?></dd>
-
+                                    <dd><?php echo htmlentities($contact['client']) ?></dd>
                                     <dt>E-mail</dt>
-                                    <dd><?php echo $contactObject->getEmail()?></dd>
-
+                                    <dd><?php echo htmlentities($contact['email']) ?></dd>
                                     <dt>Phone</dt>
-                                    <dd><?php echo $contactObject->getPhone()?></dd>
+                                    <dd><?php echo htmlentities($contact['phone']) ?></dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo $companyObject->getName()?></h2>
-                                <div class="clearfix"></div>
+                                <h2><?php echo $companyObject->getName() ?></h2>
+                                <div class="clearfix">
+                                </div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo $companyObject->getName()?></dd>
-
+                                    <dd><?php echo $companyObject->getName() ?></dd>
                                     <dt>Address</dt>
-                                    <dd><?php echo $companyObject->formatAddress()?></dd>
-
+                                    <dd><?php echo $companyObject->formatAddress() ?></dd>
                                     <dt>Zip</dt>
-                                    <dd><?php echo $companyObject->getZip()?></dd>
-
+                                    <dd><?php echo $companyObject->getZip() ?></dd>
                                     <dt>City</dt>
-                                    <dd><?php echo $companyObject->getCity()?></dd>
-
+                                    <dd><?php echo $companyObject->getCity() ?></dd>
                                     <dt>VAT</dt>
-                                    <dd><?php echo $companyObject->getVat()?></dd>
-
+                                    <dd><?php echo $companyObject->getVat() ?></dd>
                                     <dt>Activity</dt>
-                                    <dd><?php echo $companyObject->getActivity()?></dd>
+                                    <dd><?php echo $companyObject->getActivity() ?></dd>
                                 </dl>
                             </div>
                         </div>
@@ -112,7 +101,6 @@
             </div>
         </div>
         <!-- /page content -->
-
         <!-- footer content -->
         <?php require_once $basePath . 'resources/templates/layout/parts/footer.php'?>
         <!-- /footer content -->

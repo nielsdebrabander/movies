@@ -26,17 +26,17 @@
         public function getPhone (): string {
             return $this->phone;
         }
-        public function setName (?string $name): void {
+        public function setName (string $name): void {
             $this->name = $name;
         }
-        public function setClient (?string $client): void {
+        public function setClient (string $client): void {
             $this->client = $client;
         }
-        public function setEmail (?string $email): void {
+        public function setEmail (string $email): void {
             $this->email = $email;
         }
 
-        public function setPhone (?string $phone): void {
+        public function setPhone (string $phone): void {
             $this->phone = $phone;
         }
     }

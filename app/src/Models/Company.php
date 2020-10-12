@@ -66,24 +66,24 @@
 
         function formatAddress (string $Country = 'BE'): string {
             $address = explode(' ', $this->address);
-            $street = '';
-            $number = '';
+            $streetFormat = '';
+            $numberFormat = '';
             $format = '';
 
-            foreach ($address as $part) {
-                if ((int)$part === 0) {
-                    $street .= $part;
+            foreach ($address as $addressPart) {
+                if ((int)$addressPart === 0) {
+                    $streetFormat .= $addressPart;
                 }
-                else if ((int)$part !== 0) {
-                    $number .= $part;
+                else if ((int)$addressPart !== 0) {
+                    $numberFormat .= $addressPart;
                 }
             }
 
             if ($Country === 'BE') {
-                $format .= $street . ' ' . $number;
+                $format .= $streetFormat . ' ' . $numberFormat;
             }
             else if ($Country === 'FR') {
-                $format .= $number . ' ' . $street;
+                $format .= $numberFormat . ' ' . $streetFormat;
             }
 
             return $format;
