@@ -40,69 +40,70 @@
         <?php require_once  $basePath . 'resources/templates/layout/parts/header.php'?>
         <!-- /header -->
         <!-- page content -->
+        <?php  require_once (__DIR__ . '/../../../src/Models/company.php');?>
         <div class="right_col" role="main">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3><?php echo $_GET['name'] ?></h3>
+                        <h3><?php echo $_GET['name']; ?></h3>
                     </div>
                 </div>
+
                 <div class="clearfix"></div>
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo $_GET['name'] ?></h2>
-                                <div class="clearfix">
-                                </div>
+                                <h2><?php echo $_GET['name']; ?></h2>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo $_GET['name'] ?></dd>
-                                    <dt>Address</dt>
-                                    <dd><?php echo $_GET['client'] ?></dd>
-                                    <dt>Zip</dt>
-                                    <dd><?php echo $_GET['email'] ?></dd>
-                                    <dt>City</dt>
-                                    <dd><?php echo $_GET['phone'] ?></dd>
-                                    <dt>VAT</dt>
+                                    <dd><?php echo $_GET['name']; ?></dd>
+
+                                    <dt>Client</dt>
+                                    <dd><?php echo $_GET['client']; ?></dd>
+
+                                    <dt>Email</dt>
+                                    <dd><?php echo $_GET['email']; ?></dd>
+
+                                    <dt>Phone</dt>
+                                    <dd><?php echo $_GET['phone']; ?></dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>   <div class="right_col" role="main">
-            <div class="">
-                <div class="page-title">
-                    <div class="title_left">
-                        <h3><?php echo $companyObject->getName() ?></h3>
-                    </div>
-                </div>
-                <div class="clearfix"></div>
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo $companyObject->getName() ?></h2>
-                                <div class="clearfix">
-                                </div>
+                                <h2><?php echo $companyClient->getName(); ?></h2>
+                                <div class="clearfix"></div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo $companyObject->getName() ?></dd>
+                                    <dd><?php echo $companyClient->getName(); ?></dd>
+
                                     <dt>Address</dt>
-                                    <dd><?php echo $companyObject->formatAddress() ?></dd>
+                                    <dd><?php echo $companyClient->getAddress(); ?></dd>
+
                                     <dt>Zip</dt>
-                                    <dd><?php echo $companyObject->getZip() ?></dd>
+                                    <dd><?php echo $companyClient->getZip(); ?></dd>
+
                                     <dt>City</dt>
-                                    <dd><?php echo $companyObject->getCity() ?></dd>
-                                    <dt>VAT</dt>
-                                    <dd><?php echo $companyObject->getVat() ?></dd>
+                                    <dd><?php echo $companyClient->getCity(); ?></dd>
+
+                                    <dt>Vat</dt>
+                                    <dd><?php echo $companyClient->getVat(); ?></dd>
+
                                     <dt>Activity</dt>
-                                    <dd><?php echo $companyObject->getActivity() ?></dd>
+                                    <dd><?php echo $companyClient->getActivity(); ?></dd>
+
                                 </dl>
                             </div>
                         </div>
@@ -111,6 +112,7 @@
             </div>
         </div>
         <!-- /page content -->
+
         <!-- footer content -->
         <?php require_once $basePath . 'resources/templates/layout/parts/footer.php'?>
         <!-- /footer content -->

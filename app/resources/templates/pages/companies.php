@@ -170,7 +170,10 @@
                                     <td class=" "><?php echo htmlentities($contact['client'])?></td>
                                     <td class=" "><?php echo htmlentities($contact['email'])?></td>
                                     <td class=" "><?php echo htmlentities($contact['phone'])?></td>
-                                    <td class=" last"><a href="./contact.php?search=<?php echo htmlentities($contact['name'])?>">View</a></td>
+                                    <?php $url = "contact.php?name=" . $contact['name'] . "&client=" . $contact['client'] . "&email=" . $contact['email'] . "&phone=" . $contact['phone'];?>
+                                    <td class=" last"><a href="<?php echo $url?> ">View</a>
+
+
                                     </td>
                                 </tr>
                             <?php } ?>
