@@ -44,33 +44,43 @@
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3><?php echo htmlentities($contact['name']) ?></h3>
+                        <h3><?php echo $_GET['name'] ?></h3>
                     </div>
                 </div>
-                <div class="clearfix">
-                </div>
+                <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2><?php echo htmlentities($contact['name']) ?></h2>
-                                <div class="clearfix"></div>
+                                <h2><?php echo $_GET['name'] ?></h2>
+                                <div class="clearfix">
+                                </div>
                             </div>
                             <div class="x_content">
                                 <dl>
                                     <dt>Name</dt>
-                                    <dd><?php echo htmlentities($contact['name']) ?></dd>
-                                    <dt>Client</dt>
-                                    <dd><?php echo htmlentities($contact['client']) ?></dd>
-                                    <dt>E-mail</dt>
-                                    <dd><?php echo htmlentities($contact['email']) ?></dd>
-                                    <dt>Phone</dt>
-                                    <dd><?php echo htmlentities($contact['phone']) ?></dd>
+                                    <dd><?php echo $_GET['name'] ?></dd>
+                                    <dt>Address</dt>
+                                    <dd><?php echo $_GET['client'] ?></dd>
+                                    <dt>Zip</dt>
+                                    <dd><?php echo $_GET['email'] ?></dd>
+                                    <dt>City</dt>
+                                    <dd><?php echo $_GET['phone'] ?></dd>
+                                    <dt>VAT</dt>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>   <div class="right_col" role="main">
+            <div class="">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3><?php echo $companyObject->getName() ?></h3>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">

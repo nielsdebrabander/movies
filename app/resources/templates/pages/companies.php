@@ -109,13 +109,13 @@
                                                     <td class="a-center ">
                                                         <input type="checkbox" class="flat" name="table_records">
                                                     </td>
-                                                    <td class=" "><?php echo $company->getName() ?></td>
-                                                    <td class=" "><?php echo $company->formatAddress() ?></td>
-                                                    <td class=" "><?php echo $company->getZip() ?></td>
-                                                    <td class=" "><?php echo $company->getCity() ?></td>
-                                                    <td class=" "><?php echo $company->getActivity() ?></td>
-                                                    <td class=" "><?php echo $company->getVat() ?></td>
-                                                    <td class=" last"><a href="./company.php?search=<?php echo $company->getName() ?>">View</a></td>
+                                                    <td class=" "><?php echo htmlentities($company->getName())?></td>
+                                                    <td class=" "><?php echo htmlentities($company->formatAddress())?></td>
+                                                    <td class=" "><?php echo htmlentities($company->getZip())?></td>
+                                                    <td class=" "><?php echo htmlentities($company->getCity())?></td>
+                                                    <td class=" "><?php echo htmlentities($company->getActivity())?></td>
+                                                    <td class=" "><?php echo htmlentities($company->getVat())?></td>
+                                                    <td class=" last"><a href="./company.php?search=<?php echo htmlentities($company->getName())?>">View</a></td>
                                                 </tr>
                                             <?php } ?>
                                         <?php } else { ?>
@@ -142,52 +142,50 @@
                                         <p>This is an overview of all our contacts</p>
                                     </div>
                                 </div>
-                                <div class="table-responsive">
-                                    <table class="table table-striped jambo_table bulk_action">
-                                        <thead>
-                                        <tr class="headings">
-                                            <th>
-                                                <input type="checkbox" id="check-all" class="flat">
-                                            </th>
-                                            <th class="column-title">Name</th>
-                                            <th class="column-title">Client</th>
-                                            <th class="column-title">Email</th>
-                                            <th class="column-title">Phone</th>
-                                            <th class="column-title no-link last"><span class="nobr">Action</span></th>
-                                            <th class="bulk-actions" colspan="7">
-                                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
-                                                    <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i>
-                                                </a>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php if (count($contacts)&& count($contactObject)) { ?>
-                                            <?php foreach ($contactObject as $counter => $contact) { ?>
-                                                <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
-                                                    <td class="a-center ">
-                                                        <input type="checkbox" class="flat" name="table_records">
-                                                    </td>
-                                                    <td class=" "><?php echo htmlentities($contact -> getName()) ?></td>
-                                                    <td class=" "><?php echo htmlentities($contact -> getClient()) ?></td>
-                                                    <td class=" "><?php echo htmlentities($contact -> getEmail()) ?></td>
-                                                    <td class=" "><?php echo htmlentities($contact -> getPhone()) ?></td>
-                                                    <td class=" last"><a href="./contact.php?search=<?php echo htmlentities($contact -> getName()) ?>">View</a></td>
-                                                </tr>
-                                            <?php } ?>
-                                        <?php } else { ?>
-                                            <?php echo 'Geen contactpersonen gevonden voor zoekterm "' . $_GET['term'] . '"'; ?>
-                                        <?php } ?>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                        <tr class="headings">
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">Name</th>
+                            <th class="column-title">Client</th>
+                            <th class="column-title">Email</th>
+                            <th class="column-title">Phone</th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions (
+                                    <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (count($contacts)) {?>
+                            <?php foreach ($contacts as $counter => $contact) {?>
+                                <tr class="<?php echo $counter % 2 == 0 ? 'even' : 'odd'; ?>> pointer">
+                                    <td class="a-center "><input type="checkbox" class="flat" name="table_records"></td>
+                                    <td class=" "><?php echo htmlentities($contact['name'])?></td>
+                                    <td class=" "><?php echo htmlentities($contact['client'])?></td>
+                                    <td class=" "><?php echo htmlentities($contact['email'])?></td>
+                                    <td class=" "><?php echo htmlentities($contact['phone'])?></td>
+                                    <td class=" last"><a href="./contact.php?search=<?php echo htmlentities($contact['name'])?>">View</a></td>
+                                    </td>
+                                </tr>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <?php echo 'Sorry opgegeven zoekterm heeft geen resultaten teruggevonden "' . $_GET['term'] . '"'; ?>
+                        <?php } ?>
+                        </tbody>
+                    </table>
                 </div>
+
             </div>
         </div>
-        <!-- /page content -->
+    </div>
+</div>
+<!-- /page content -->
         <!-- footer content -->
         <?php require_once $basePath . 'resources/templates/layout/parts/footer.php'?>
         <!-- /footer content -->

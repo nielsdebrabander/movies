@@ -4,6 +4,7 @@
 
     // Data
     $companies = require_once $basePath . 'resources/data/companies.php';
+    $contacts = require $basePath. '/resources/data/contacts.php';
     $companyObject = [];
 
     require_once $basePath . 'src/Models/Company.php';
@@ -151,6 +152,26 @@
             $companyObject[] = new Company($name, $address, $zip, $city, $activity, $vat);
         }
     }
+    //part for contacts
+    foreach ($contacts as $counter => $contact){
+
+        if(isset($_GET['term'])){
+            $term = $_GET['term'];
+
+            $contactName = strripos(htmlentities($contact['name']),$term);
+            $contactClient = strripos(htmlentities($contact['client']),$term);
+            $contactEmail = strripos(htmlentities($contact['email']),$term);
+            $contactPhone = strripos(htmlentities($contact['phone']),$term);
+
+            if(!ctype_alnum($term)){
+                unset($contacts[$counter]);
+            }
+            if($contactName === false && $contactClient === false && $contactEmail === false && $contactPhone === false ){
+                unset($contacts[$counter]);
+            }
+        }
+    }
+
     // View
     require_once $basePath . 'resources/templates/pages/companies.php';
 
