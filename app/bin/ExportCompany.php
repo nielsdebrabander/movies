@@ -21,7 +21,7 @@
 
         if (count($companyObject) > 0) {
 
-            header("Content-type: text/csv");
+            header("Content-type: company/csv");
 
             $csvHeading = ['Name', 'Address', 'Zip', 'City', 'Activity', 'Vat'];
 

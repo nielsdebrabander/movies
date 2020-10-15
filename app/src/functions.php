@@ -20,7 +20,6 @@
         return -1;
     }
 
-
     function sorter (string $key): callable {
         return function ($a, $b) use ($key) {
             return strnatcmp($a[$key], $b[$key]);

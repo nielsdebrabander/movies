@@ -15,9 +15,9 @@
     //search company
     if ($argc > 1) {
 
-        $filteredTerm = filterString((string)$argv[1]);
+        $filterTerm = filterString((string)$argv[1]);
 
-        $companyObject = searchCompanyByName($companies, $filteredTerm);
+        $companyObject = searchCompanyByName($companies, $filterTerm);
 
 
         if (count($companyObject) > 0) {
@@ -32,11 +32,7 @@
             }
         }
         else {
-            echo 'No companies found for search term: ' . $filteredTerm . PHP_EOL;
+            echo 'No companies found for search term: ' . $filterTerm . PHP_EOL;
         }
     }
-    else {
-        echo 'No parameters found, give a parameter to the script' . PHP_EOL;
-    }
-
 ?>
