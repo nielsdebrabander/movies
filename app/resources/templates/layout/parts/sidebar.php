@@ -33,6 +33,7 @@
                         <ul class="nav child_menu">
                             <li><a href="/companies.php">Companies</a></li>
                             <li><a href="/companies.php">Contacts</a></li>
+                            <li><a href="/add-company.php">Add-Company</a></li>
                         </ul>
                     </li>
                 </ul>
