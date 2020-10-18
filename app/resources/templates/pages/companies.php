@@ -67,72 +67,44 @@
                 </div>
                 <div class="clearfix">
                 </div>
-                <form action="" method="GET" class="form-label-left input_mask">
-                    <?php
-                        $termErr = $cityErr = $provinceErr = "";
-                        $term = $city = $province = "";
-
-                        if ($_SERVER["REQUEST_METHOD"] == "GET") {
-                          if (empty($_GET["term"])) {
-                            $termErr = "Term is required";
-                          } else {
-                            $term = $_GET["term"];
-                          }
-
-                          if (empty($_GET["city"])) {
-                            $cityErr = "City is required";
-                          } else {
-                            $city = $_GET["city"];
-                          }
-
-                          if (empty($_GET["province[]"])) {
-                            $provinceErr = "Province is required";
-                          } else {
-                            $province = $_GET["province[]"];
-                          }
-                        }
-                        ?>
-
-                    <div class="col-md-4 col-sm-4 form-group has-feedback bad">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="GET" class="form-label-left input_mask">
+                    <div class="col-md-4 col-sm-4 form-group has-feedback <?php if (!$okTerm) { echo 'bad'; } ?>">
                         <label for="term">Term</label>
-                        <input type="text" name="term" class="form-control" id="term" placeholder="Term">
-                        <div class="red p-2"><?php echo $termErr;?></div>
+                        <input type="text" name="term" class="form-control" id="term" placeholder="Term" value="<?php echo   htmlentities($term); ?>">
+                        <div class="red p-2"><?php echo htmlentities($ErrTerm) ?></div>
                     </div>
 
-                    <div class="col-md-4 col-sm-4 form-group has-feedback bad">
+                    <div class="col-md-4 col-sm-4 form-group has-feedback <?php if (!$okCity) { echo 'bad'; } ?>">
                         <label for="city">City</label>
                         <select class="form-control" id="city" name="city">
-                                <?php foreach ($companies as $city) {?>
-                            <option><?php echo htmlentities($city['city'])?></option>
-                                <?php } ?>
+                            <option value="Choose city" <?php if ($cityValue == 'Choose city') { echo ' selected="selected"'; } ?>>Choose city</option>
+                            <?php foreach ($companyCities as $city) { ?>
+                                <option <?php echo 'value=' . urlencode($city); ?> <?php if ($cityValue == $city) { echo ' selected="selected"'; } ?>>
+                                    <?php echo htmlentities($city); ?>
+                                </option>
+                            <?php } ?>
                         </select>
-                        <div class="red p-2"><?php echo $cityErr;?></div>
+                        <div class="red p-2"><?php echo htmlentities($ErrDropdown) ?></div>
                     </div>
 
-
-                    <div class="col-md-4 col-sm-4 form-group has-feedback bad">
+                    <div class="col-md-4 col-sm-4 form-group has-feedback <?php if (!$okProvince) { echo 'bad'; } ?>">
                         <label for="province">Province</label>
                         <select class="select2_multiple form-control" id="province" name="province[]" multiple="multiple">
-                            <option>West-Vlaanderen</option>
-                            <option>Oost-Vlaanderen</option>
-                            <option>Antwerpen</option>
-                            <option>Limburg</option>
-                            <option>Vlaams-Brabant</option>
-                            <option>Waals-Brabant</option>
-                            <option>Henegouwen</option>
-                            <option>Namen</option>
-                            <option>Luik</option>
-                            <option>Luxemburg</option>
+                            <?php foreach ($provinces as $province) { ?>
+                                <option <?php echo 'value=' . urlencode($province->getName()); ?> <?php if (in_array($province->getName(), $provinceValue)) { echo ' selected="selected"'; } ?>>
+                                    <?php echo htmlentities($province->getName()); ?>
+                                </option>
+                            <?php } ?>
                         </select>
-                        <div class="red p-2"><?php echo $provinceErr;?></div>
+                        <div class="red p-2"><?php echo htmlentities($ErrProvince) ?></div>
                     </div>
 
                     <div class="col-md-12 col-sm-6 form-group has-feedback">
                         <input type="hidden" name="moduleAction" value="search-company" />
                         <input type="submit" value="Search" class="btn btn-success" name="submit" />
                     </div>
-
                 </form>
+
                 <div class="row" style="display: block;">
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
@@ -237,8 +209,6 @@
                                     <td class=" "><?php echo htmlentities($contact['email'])?></td>
                                     <td class=" "><?php echo htmlentities($contact['phone'])?></td>
                                     <td class=" last"><a href="./contact.php?<?php echo "name=" . $contact['name'] . "&client=" . $contact['client'] . "&email=" . $contact['email'] . "&phone=" . $contact['phone']?>">View</a></td>
-
-
                                     </td>
                                 </tr>
                             <?php } ?>

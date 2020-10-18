@@ -201,4 +201,34 @@
 
         return $companyObject;
     }
+    function createCompanyObj (array $array): array {
+        $companyObj = [];
+        foreach ($array as $index => $company) {
+            $name = $company['name'];
+            $address = $company['address'];
+            $zip = $company['zip'];
+            $city = $company['city'];
+            $activity = $company['activity'];
+            $vat = $company['vat'];
+
+            $companyObj[] = new Company($name, $address, $zip, $city, $vat, $activity);
+        }
+
+        return $companyObj;
+    }
+    function createContactObj (array $array): array {
+        $contactObj = [];
+        foreach ($array as $index => $contact) {
+            $name = $contact['name'];
+            $client = $contact['client'];
+            $email = $contact['email'];
+            $phone = $contact['phone'];
+
+            $contactObj[] = new Contact($name, $client, $email, $phone);
+        }
+
+        return $contactObj;
+    }
+
+
 ?>
