@@ -34,6 +34,7 @@
                             <li><a href="/companies.php">Companies</a></li>
                             <li><a href="/companies.php">Contacts</a></li>
                             <li><a href="/add-company.php">Add-Company</a></li>
+                            <li><a href="/tickets.php">tickets</a></li>
                         </ul>
                     </li>
                 </ul>
