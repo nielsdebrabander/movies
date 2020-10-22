@@ -6,13 +6,14 @@
     $companies = require_once $basePath . 'resources/data/companies.php';
     require_once $basePath . 'src/Models/Company.php';
     require_once $basePath . 'src/functions.php';
+    $priority = ['laag', 'middel', 'hoog'];
 
     $nameValue = isset($_POST['name']) ? (string)$_POST['name'] : '';
     $companyValue = isset($_POST['company']) ? (string)$_POST['company'] : '';
     $dateValue = isset($_POST['date']) ? (string)$_POST['date'] : '';
     $shortValue = isset($_POST['short']) ? (string)$_POST['short'] : '';
     $longValue = isset($_POST['long']) ? (string)$_POST['long'] : '';
-    $desiredValue = isset($_POST['situation']) ? (string)$_POST['situation'] : '';
+    $desiredValue = isset($_POST['desired']) ? (string)$_POST['desired'] : '';
     $priorValue = isset($_POST['prior']) ? (string)$_POST['prior'] : '';
     $emailValue = isset($_POST['email']) ? (string)$_POST['email'] : '';
     $fileToUploadValue = isset($_FILES['fileToUpload']) ? $_FILES['fileToUpload'] : '';
@@ -98,15 +99,19 @@
         }
 
         if ($ok) {
-            $info = array('name' => $nameValue, 'company' => $companyValue, 'date' => $dateValue, 'short description' => $shortValue, 'long description' => $longValue, 'desired situation' => $desiredValue, 'priority' => $priorValue, 'email' => $emailValue, 'file' => $fileToUploadValue);
+            $info = array($nameValue, $companyValue, $dateValue, $shortValue, $longValue, $desiredValue, $priorValue, $emailValue, $fileToUploadValue);
 
             foreach ($companies as $company) {
                if ($company['name'] === $companyValue) {
-
-
-                }
+                    $getVat = $company['vat'];
+               }
             }
+
             $filePath = $basePath . 'resources/data/tickets';
+            //$path = $filePath .  '/' . $getVat . '.csv';
+            $file = fopen($filePath, "w");
+            $test = "hallo";
+            fwrite($file, $test);
 
 
         }

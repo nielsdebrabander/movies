@@ -109,7 +109,7 @@
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="short" name="long" rows="4" cols="50"></textarea>
+                                            <textarea id="desired" name="long" rows="4" cols="50"></textarea>
                                         </div>
                                           <?php if (!$longOk) { echo '<div class="red p-2">' . $ErrLong . '</div>'; } ?>
                                     </div>
@@ -119,7 +119,7 @@
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="short" name="long" rows="4" cols="50"></textarea>
+                                            <textarea id="desired" name="desired" rows="4" cols="50"></textarea>
                                         </div>
                                         <?php if (!$desiredOk) { echo '<div class="red p-2">' . $ErrDesired . '</div>'; } ?>
                                     </div>
@@ -130,9 +130,12 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select class="form-control" id="prior" name="prior">
-                                                <option value="<?php echo htmlentities($priorValue); ?>">Laag</option>
-                                                <option value="<?php echo htmlentities($priorValue); ?>">Middel</option>
-                                                <option value="<?php echo htmlentities($priorValue); ?>">Hoog</option>
+                                                <option value="<?php echo htmlentities($priorValue); ?>">priority</option>
+                                                <?php foreach ($priority as $prior) { ?>
+                                                <option>
+                                                    <?php echo  htmlentities($prior);?>
+                                                </option>
+                                                <?php } ?>
                                             </select>
                                         </div>
                                         <?php if (!$priorOk) { echo '<div class="red p-2">' . $ErrPrior . '</div>'; } ?>
@@ -147,7 +150,7 @@
                                         </div>
                                          <?php if (!$emailOk) { echo '<div class="red p-2">' . $ErrEmail . '</div>'; } ?>
                                     </div>
-                                      <div class="field item form-group <?php if (!$fileToUploadOk) {echo 'bad'; } ?>">
+                                      <!--<div class="field item form-group <?php if (!$fileToUploadOk) {echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             upload file
                                             <span class="required">*</span>
@@ -158,7 +161,7 @@
                                                 <input type="submit" value="Upload" name="submit">
                                         </div>
                                           <?php if (!$fileToUploadOk) { echo '<div class="red p-2">' . $ErrFileToUpload . '</div>'; } ?>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
                                             <input type="hidden" name="moduleAction" value="Submit-company" />

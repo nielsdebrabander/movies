@@ -70,7 +70,6 @@
             $company = array('name' => $nameValue, 'address' => $addressValue, 'zip' => $zipValue, 'city' => $cityValue, 'activity' => $activityValue, 'vat' => $vatValue);
 
             $strNewCompany = '[';
-
             foreach ($company as $key => $value) {
                 if (is_int($value) == 1) {
                     $strNewCompany .= '\'' . $key . '\'' . ' => ' . $value . ', ';
