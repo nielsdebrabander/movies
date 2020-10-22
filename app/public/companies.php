@@ -255,7 +255,6 @@
 
                 $companyObject = createCompanyObj($companies);
 
-                // Convert data to objects for contacts
                 $contactObject = createContactObj($contacts);
             }
 

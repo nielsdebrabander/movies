@@ -8,10 +8,8 @@
 
     $nameValue = isset($_POST['name']) ? (string)$_POST['name'] : '';
     $addressValue = isset($_POST['address']) ? (string)$_POST['address'] : '';
-
     $zipValue = isset($_POST['zip']) ? (string)$_POST['zip'] : '';
     $zipValue = (int)$zipValue;
-
     $cityValue = isset($_POST['city']) ? (string)$_POST['city'] : '';
     $vatValue = isset($_POST['vat']) ? (string)$_POST['vat'] : '';
     $activityValue = isset($_POST['Activity']) ? (string)$_POST['Activity'] : '';

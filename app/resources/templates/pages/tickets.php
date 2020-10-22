@@ -56,83 +56,98 @@
                         <div class="x_panel">
                             <div class="x_content">
                                 <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" novalidate="">
-                                    <div class="field item form-group">
+                                    <div class="field item form-group <?php if (!$nameOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Name
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" data-validate-length-range="6" name="name" placeholder="ex. Your Company" required="required" value="">
+                                            <input class="form-control" data-validate-length-range="6" name="name" placeholder="Titel" required="required" value="<?php echo htmlentities($nameValue); ?>">
+                                            <?php if (!$nameOk) { echo '<div class="red p-2">' . $ErrName . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                    <div class="field item form-group <?php if (!$companyOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Company
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select class="form-control" id="city" name="city">
-                                                <option value="Choose company">choose company</option>
+                                            <select class="form-control" id="company" name="company">
+                                                <option value="<?php echo htmlentities($companyValue); ?>">Choose company</option>
+                                                <?php foreach ($companies as $company) { ?>
+                                                    <option>
+                                                        <?php echo  htmlentities($company['name']);?>
+                                                    </option>
+                                                <?php } ?>
                                             </select>
+                                            <?php if (!$companyOk) { echo '<div class="red p-2">' . $ErrCompany . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group ">
+                                     <div class="field item form-group <?php if (!$dateOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Date
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-2 col-sm-2">
-                                            <input type="date" id="date" name="date">
+                                            <input type="date" id="date" name="date" value="<?php echo htmlentities($dateValue); ?>">
+                                            <?php if (!$dateOk) { echo '<div class="red p-2">' . $ErrDate . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                     <div class="field item form-group <?php if (!$shortOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             short description
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                           <textarea id="short" name="short" rows="4" cols="10"></textarea>
+                                            <textarea id="short" name="short" rows="4" cols="10"></textarea>
+                                            <?php if (!$shortOk) { echo '<div class="red p-2">' . $ErrShort . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                      <div class="field item form-group <?php if (!$longOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Long description
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="long" name="long" rows="4" cols="50"></textarea>
+                                            <textarea id="short" name="long" rows="4" cols="50"></textarea>
+                                            <?php if (!$longOk) { echo '<div class="red p-2">' . $ErrLong . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                    <div class="field item form-group <?php if (!$desiredOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            desired situation
+                                            Desired situation
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="situation" name="situation" rows="4" cols="50"></textarea>
+                                            <textarea id="short" name="long" rows="4" cols="50"></textarea>
+                                            <?php if (!$desiredOk) { echo '<div class="red p-2">' . $ErrDesired . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                    <div class="field item form-group <?php if (!$priorOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             priority
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <select class="form-control" id="prior" name="prior">
-                                                <option value="priority">priority</option>
+                                                <option value="<?php echo htmlentities($priorValue); ?>">Laag</option>
+                                                <option value="<?php echo htmlentities($priorValue); ?>">Middel</option>
+                                                <option value="<?php echo htmlentities($priorValue); ?>">Hoog</option>
                                             </select>
+                                            <?php if (!$priorOk) { echo '<div class="red p-2">' . $ErrPrior . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                     <div class="field item form-group <?php if (!$emailOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             email
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input type="email" class="form-control" data-validate-length-range="6" name="email" placeholder="test@gmail.com" required="required" value="">
+                                            <input type="email" class="form-control" data-validate-length-range="6" name="email" placeholder="test@gmail.com" required="required" value="<?php echo htmlentities($emailValue); ?>">
+                                            <?php if (!$emailOk) { echo '<div class="red p-2">' . $ErrEmail . '</div>'; } ?>
                                         </div>
                                     </div>
-                                    <div class="field item form-group">
+                                     <!-- <div class="field item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             upload file
                                             <span class="required">*</span>
@@ -144,7 +159,7 @@
                                                 <input type="submit" value="Upload" name="submit">
                                             </form>
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
                                             <input type="hidden" name="moduleAction" value="Submit-company" />
