@@ -5,6 +5,7 @@
     // Data
     $companies = require_once $basePath . 'resources/data/companies.php';
     require_once $basePath . 'src/Models/Company.php';
+    require_once $basePath . 'src/functions.php';
 
     $nameValue = isset($_POST['name']) ? (string)$_POST['name'] : '';
     $companyValue = isset($_POST['company']) ? (string)$_POST['company'] : '';
@@ -14,7 +15,8 @@
     $desiredValue = isset($_POST['situation']) ? (string)$_POST['situation'] : '';
     $priorValue = isset($_POST['prior']) ? (string)$_POST['prior'] : '';
     $emailValue = isset($_POST['email']) ? (string)$_POST['email'] : '';
-    $fileToUploadValue = isset($_POST['fileToUpload']) ? (string)$_POST['fileToUlpoad'] : '';
+    $fileToUploadValue = isset($_FILES['fileToUpload']) ? $_FILES['fileToUpload'] : '';
+    $allowed_image_extension = array("jpeg", "png", "doc", "docx", "xls","xlsx", "pdf");
 
     $ErrName = '';
     $ErrCompany = '';
@@ -89,36 +91,25 @@
             $ok = false;
             $fileToUploadOk = false;
         }
+        if(in_array($fileToUploadValue, $allowed_image_extension)=== false){
+            $ErrFileToUpload = 'Gelieve een (jpeg, png, doc(x), xls(x) of pdf) ';
+            $ok = false;
+            $fileToUploadOk = false;
+        }
 
-        /*if ($ok) {
-            $company = array('name' => $nameValue, 'address' => $companyValue, 'zip' => $dateValue, 'city' => $shortValue, 'activity' => $longValue, 'vat' => $desiredValue, 'check' => $priorValue, 'oke' => $emailValue, 'yess' => $fileToUploadValue);
+        if ($ok) {
+            $info = array('name' => $nameValue, 'company' => $companyValue, 'date' => $dateValue, 'short description' => $shortValue, 'long description' => $longValue, 'desired situation' => $desiredValue, 'priority' => $priorValue, 'email' => $emailValue, 'file' => $fileToUploadValue);
 
-            $strNewCompany = '[';
+            foreach ($companies as $company) {
+               if ($company['name'] === $companyValue) {
 
-            foreach ($company as $key => $value) {
-                if (is_int($value) == 1) {
-                    $strNewCompany .= '\'' . $key . '\'' . ' => ' . $value . ', ';
-                }
-                else {
-                    $strNewCompany .= '\'' . $key . '\'' . ' => ' . '\'' . $value . '\'' . ', ';
+
                 }
             }
-            $strNewCompany = substr_replace($strNewCompany, ']', -2);
+            $filePath = $basePath . 'resources/data/tickets';
 
-            $filePath = $basePath . 'resources/data/companies.php';
-            $file = fopen($filePath, 'r+');
 
-            fseek($file, -7, SEEK_END);
-
-            fwrite($file, ',' . PHP_EOL);
-            fwrite($file, '        ' . $strNewCompany . PHP_EOL);
-            fwrite($file, '    ];');
-
-            fclose($file);
-
-            header('location: companies.php');
-            exit();
-        }*/
+        }
     }
 
     // View

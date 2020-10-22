@@ -100,8 +100,5 @@ return
      ['name' => 'Randstad Group Belgium', 'address' => 'Keizer Karellaan 586/8', 'zip' => 1082, 'city' => 'Brussel', 'activity' => 'Temporary employment agency activities', 'vat' => 'BE0874753819'],
      ['name' => 'Ancco Dienstencheques', 'address' => 'Bisschoppenhoflaan 297/1', 'zip' => 2100, 'city' => 'Deurne', 'activity' => 'Activities of employment placement agencies', 'vat' => 'BE0880511461'],
      ['name' => 'Smals', 'address' => 'Avenue Fonsny 20', 'zip' => 1060, 'city' => 'Bruxelles', 'activity' => 'Data processing, hosting and related activities', 'vat' => 'BE0406798006'],
-     ['name' => 'Fabricom', 'address' => 'Boulevard Simon Bolivar 34-36', 'zip' => 1000, 'city' => 'Bruxelles', 'activity' => 'Manufacture of metal structures and parts of structures', 'vat' => 'BE0425702910'],
-     ['name' => 'Mijn bedrijf', 'address' => 'Mijn nieuwe adres', 'zip' => 9001, 'city' => 'Gent', 'activity' => 'Een nieuwe bedrijf met random activiteiten', 'vat' => 'BE112345234421323']
-,
-
+     ['name' => 'Fabricom', 'address' => 'Boulevard Simon Bolivar 34-36', 'zip' => 1000, 'city' => 'Bruxelles', 'activity' => 'Manufacture of metal structures and parts of structures', 'vat' => 'BE0425702910']
     ];

@@ -63,8 +63,8 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <input class="form-control" data-validate-length-range="6" name="name" placeholder="Titel" required="required" value="<?php echo htmlentities($nameValue); ?>">
-                                            <?php if (!$nameOk) { echo '<div class="red p-2">' . $ErrName . '</div>'; } ?>
                                         </div>
+                                        <?php if (!$nameOk) { echo '<div class="red p-2">' . $ErrName . '</div>'; } ?>
                                     </div>
                                     <div class="field item form-group <?php if (!$companyOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -80,8 +80,8 @@
                                                     </option>
                                                 <?php } ?>
                                             </select>
-                                            <?php if (!$companyOk) { echo '<div class="red p-2">' . $ErrCompany . '</div>'; } ?>
                                         </div>
+                                        <?php if (!$companyOk) { echo '<div class="red p-2">' . $ErrCompany . '</div>'; } ?>
                                     </div>
                                      <div class="field item form-group <?php if (!$dateOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -90,8 +90,8 @@
                                         </label>
                                         <div class="col-md-2 col-sm-2">
                                             <input type="date" id="date" name="date" value="<?php echo htmlentities($dateValue); ?>">
-                                            <?php if (!$dateOk) { echo '<div class="red p-2">' . $ErrDate . '</div>'; } ?>
                                         </div>
+                                         <?php if (!$dateOk) { echo '<div class="red p-2">' . $ErrDate . '</div>'; } ?>
                                     </div>
                                      <div class="field item form-group <?php if (!$shortOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -100,8 +100,8 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <textarea id="short" name="short" rows="4" cols="10"></textarea>
-                                            <?php if (!$shortOk) { echo '<div class="red p-2">' . $ErrShort . '</div>'; } ?>
                                         </div>
+                                         <?php if (!$shortOk) { echo '<div class="red p-2">' . $ErrShort . '</div>'; } ?>
                                     </div>
                                       <div class="field item form-group <?php if (!$longOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -110,8 +110,8 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <textarea id="short" name="long" rows="4" cols="50"></textarea>
-                                            <?php if (!$longOk) { echo '<div class="red p-2">' . $ErrLong . '</div>'; } ?>
                                         </div>
+                                          <?php if (!$longOk) { echo '<div class="red p-2">' . $ErrLong . '</div>'; } ?>
                                     </div>
                                     <div class="field item form-group <?php if (!$desiredOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -120,8 +120,8 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <textarea id="short" name="long" rows="4" cols="50"></textarea>
-                                            <?php if (!$desiredOk) { echo '<div class="red p-2">' . $ErrDesired . '</div>'; } ?>
                                         </div>
+                                        <?php if (!$desiredOk) { echo '<div class="red p-2">' . $ErrDesired . '</div>'; } ?>
                                     </div>
                                     <div class="field item form-group <?php if (!$priorOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -134,8 +134,8 @@
                                                 <option value="<?php echo htmlentities($priorValue); ?>">Middel</option>
                                                 <option value="<?php echo htmlentities($priorValue); ?>">Hoog</option>
                                             </select>
-                                            <?php if (!$priorOk) { echo '<div class="red p-2">' . $ErrPrior . '</div>'; } ?>
                                         </div>
+                                        <?php if (!$priorOk) { echo '<div class="red p-2">' . $ErrPrior . '</div>'; } ?>
                                     </div>
                                      <div class="field item form-group <?php if (!$emailOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -144,22 +144,21 @@
                                         </label>
                                         <div class="col-md-6 col-sm-6">
                                             <input type="email" class="form-control" data-validate-length-range="6" name="email" placeholder="test@gmail.com" required="required" value="<?php echo htmlentities($emailValue); ?>">
-                                            <?php if (!$emailOk) { echo '<div class="red p-2">' . $ErrEmail . '</div>'; } ?>
                                         </div>
+                                         <?php if (!$emailOk) { echo '<div class="red p-2">' . $ErrEmail . '</div>'; } ?>
                                     </div>
-                                     <!-- <div class="field item form-group">
+                                      <div class="field item form-group <?php if (!$fileToUploadOk) {echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             upload file
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <form action="upload.php" method="post" enctype="multipart/form-data">
                                                 Select image to upload:
                                                 <input type="file" name="fileToUpload" id="fileToUpload">
                                                 <input type="submit" value="Upload" name="submit">
-                                            </form>
                                         </div>
-                                    </div>-->
+                                          <?php if (!$fileToUploadOk) { echo '<div class="red p-2">' . $ErrFileToUpload . '</div>'; } ?>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
                                             <input type="hidden" name="moduleAction" value="Submit-company" />
