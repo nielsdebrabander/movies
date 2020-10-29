@@ -1,121 +1,138 @@
 <?php
+
     // General variables
     $basePath = __DIR__ . '/../';
 
-    // Data
-    $companies = require_once $basePath . 'resources/data/companies.php';
+    // Classes
     require_once $basePath . 'src/Models/Company.php';
+    require_once $basePath . 'src/Models/Contact.php';
     require_once $basePath . 'src/functions.php';
-    $priority = ['laag', 'middel', 'hoog'];
 
-    $nameValue = isset($_POST['name']) ? (string)$_POST['name'] : '';
+    $companies = require_once $basePath . 'resources/data/companies.php';
+    $contacts = require_once $basePath . 'resources/data/contacts.php';
+
+    $companyObj = createCompanyObj($companies);
+
+    $contactObj = createContactObj($contacts);
+
+    $titleValue = isset($_POST['title']) ? (string)$_POST['title'] : '';
     $companyValue = isset($_POST['company']) ? (string)$_POST['company'] : '';
     $dateValue = isset($_POST['date']) ? (string)$_POST['date'] : '';
-    $shortValue = isset($_POST['short']) ? (string)$_POST['short'] : '';
-    $longValue = isset($_POST['long']) ? (string)$_POST['long'] : '';
-    $desiredValue = isset($_POST['desired']) ? (string)$_POST['desired'] : '';
-    $priorValue = isset($_POST['prior']) ? (string)$_POST['prior'] : '';
-    $emailValue = isset($_POST['email']) ? (string)$_POST['email'] : '';
-    $fileToUploadValue = isset($_FILES['fileToUpload']) ? $_FILES['fileToUpload'] : '';
-    $allowed_image_extension = array("jpeg", "png", "doc", "docx", "xls","xlsx", "pdf");
+    $shortDescValue = isset($_POST['shortDesc']) ? (string)$_POST['shortDesc'] : '';
+    $longDescValue = isset($_POST['longDesc']) ? (string)$_POST['longDesc'] : '';
+    $preferredSituationValue = isset($_POST['preferred_situation']) ? (string)$_POST['preferred_situation'] : '';
+    $priorityValue = isset($_POST['priority']) ? (string)$_POST['priority'] : '';
+    $mailValue = isset($_POST['mail']) ? (string)$_POST['mail'] : '';
+    $fileValue = isset($_FILES['file']) ? $_FILES['file'] : '';
 
-    $ErrName = '';
-    $ErrCompany = '';
-    $ErrDate = '';
-    $ErrShort = '';
-    $ErrLong = '';
-    $ErrDesired = '';
-    $ErrPrior = '';
-    $ErrEmail = '';
-    $ErrFileToUpload = '';
+    $msgTitle = '';
+    $msgCompany = '';
+    $msgDate = '';
+    $msgShortDesc = '';
+    $msgPriority = '';
+    $msgMail = '';
+    $msgFile = '';
 
-    $nameOk = true;
+    $titleOk = true;
     $companyOk = true;
     $dateOk = true;
-    $shortOk = true;
-    $longOk = true;
-    $desiredOk = true;
-    $priorOk = true;
-    $emailOk = true;
-    $fileToUploadOk = true;
+    $shortDescOk = true;
+    $priorityOk = true;
+    $mailOk = true;
+    $fileOk = true;
+
+    $vatClient = '';
 
     if (isset($_POST['moduleAction'])) {
 
         $ok = true;
 
-        if (trim($nameValue) === '') {
-            $ErrName = 'Gelieve een naam in te vullen';
+        if (trim($titleValue) === '') {
+            $msgTitle = 'Gelieve titel in te vullen';
             $ok = false;
-            $nameOk = false;
+            $titleOk = false;
         }
 
-        if (trim($companyValue) === '') {
-            $ErrCompany = 'Gelieve een bedrijf aan te duiden';
+        if ($companyValue === 'Select company') {
+            $msgCompany = 'Gelieven bedrijf te kiezen';
             $ok = false;
             $companyOk = false;
         }
-        if (trim($dateValue) === '') {
-            $ErrDate = 'Gelieve een datum op te geven';
+
+        if ($dateValue === '') {
+            $msgDate = 'Gelieve datum in te vullen';
             $ok = false;
             $dateOk = false;
         }
 
-        if (trim($shortValue) === '') {
-            $ErrShort = 'Gelieve een korte beschrijving te geven';
+        if ($shortDescValue === '') {
+            $msgShortDesc = 'Gelieve beschrijving in te vullen';
             $ok = false;
-            $shortOk = false;
+            $shortDescOk = false;
         }
 
-        if (trim($longValue) === '') {
-            $ErrLong = 'Gelieve een gedetailleerde beschrijving te geven';
+        if ($priorityValue === 'select priority') {
+            $msgPriority = 'Gelieve niveau te kiezen';
             $ok = false;
-            $longOk = false;
-        }
-        if (trim($desiredValue) === '') {
-            $ErrDesired = 'Gelieve een situatie in te geven';
-            $ok = false;
-            $desiredOk = false;
+            $priorityOk = false;
         }
 
-        if (trim($priorValue) === '') {
-            $ErrPrior = 'Gelieve een prioriteit aan te duiden';
+        if ($mailValue === '') {
+            $msgMail = 'Gelieve mail in te vullen';
             $ok = false;
-            $priorOk = false;
-        }
-        if (trim($emailValue) === '') {
-            $ErrEmail = 'Gelieve een email adres op te geven';
-            $ok = false;
-            $emailOk = false;
-        }
-        if (trim($fileToUploadValue) === '') {
-            $ErrFileToUpload = 'Gelieve een bestand te uploaden';
-            $ok = false;
-            $fileToUploadOk = false;
-        }
-        if(in_array($fileToUploadValue, $allowed_image_extension)=== false){
-            $ErrFileToUpload = 'Gelieve een (jpeg, png, doc(x), xls(x) of pdf) ';
-            $ok = false;
-            $fileToUploadOk = false;
+            $mailOk = false;
         }
 
-        if ($ok) {
-            $info = array($nameValue, $companyValue, $dateValue, $shortValue, $longValue, $desiredValue, $priorValue, $emailValue, $fileToUploadValue);
-
-            foreach ($companies as $company) {
-               if ($company['name'] === $companyValue) {
-                    $getVat = $company['vat'];
-               }
+        foreach ($companyObj as $company) {
+            if ($company->getName() == urldecode($companyValue)) {
+                $vatClient = $company->getVat();
             }
+        }
 
-            $filePath = $basePath . 'resources/data/tickets';
-            //$path = $filePath .  '/' . $getVat . '.csv';
-            $file = fopen($filePath, "w");
-            $test = "hallo";
-            fwrite($file, $test);
+        if (!file_exists('../resources/data/tickets')) {
+            mkdir('../resources/data/tickets');
+        }
 
+        if (!file_exists('../resources/data/tickets/documents')) {
+            mkdir('../resources/data/tickets/documents');
+        }
 
+        if (!file_exists('../resources/data/tickets/documents/' . $vatClient)) {
+            mkdir('../resources/data/tickets/documents/' . $vatClient);
+        }
+
+        if (isset($_FILES['file']) && ($_FILES['file']['error'] === UPLOAD_ERR_OK)) {
+            if (in_array((new SplFileInfo($_FILES['file']['name']))->getExtension(), ['jpeg', 'jpg', 'doc', 'docx', 'xls', 'xlsx', 'pdf'])) {
+                $moved = @move_uploaded_file($_FILES['file']['tmp_name'], __DIR__ . '/../resources/data/tickets/documents/' . $vatClient . '/' . $_FILES['file']['name']);
+
+                if (!$moved) {
+                    $msgFile = 'Fout bij het opslaan van het bestand';
+                    $fileOk = false;
+                }
+            }
+            else {
+                $msgFile = 'Extentie niet toegestaan';
+                $fileOk = false;
+            }
+        }
+
+        if ($ok && $fileOk) {
+
+            $uploadedFilePAth = isset($_FILES['file']) ? 'resources/data/tickets/documents/' . $vatClient . '/' . $_FILES['file']['name'] : '';
+            $ticket = fopen($basePath . 'resources/data/tickets/' . $vatClient . '.csv', 'a');
+            $value = [urldecode($titleValue), urldecode($companyValue), urldecode($dateValue), trim(urldecode($shortDescValue)), trim(urldecode($longDescValue)), trim(urldecode($preferredSituationValue)), urldecode($priorityValue), urldecode($mailValue), $uploadedFilePAth];
+            fputcsv($ticket, $value, ';');
+
+            header('location: companies.php');
+            exit();
         }
     }
 
+    $dateTimeObj = new DateTime('today');
+    $today = date_format($dateTimeObj, 'Y-m-d');
+
+
+
     // View
     require_once $basePath . 'resources/templates/pages/tickets.php';
+?>

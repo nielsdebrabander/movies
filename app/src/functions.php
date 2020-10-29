@@ -230,5 +230,42 @@
         return $contactObj;
     }
 
+    function removeSpecialChar($str) {
+        $res = str_replace( array('"'), ' ', $str);
+
+        // Returning the result
+        return $res;
+    }
+
+    function createTicketObj (string $filePath): array {
+        $ticketObj = [];
+        $file = fopen($filePath,'r');
+
+        while(! feof($file)) {
+            $line = fgets($file);
+            $parts = explode(';', $line);
+
+            if ($parts) {
+                if (count($parts) === 9) {
+
+                    $title = removeSpecialChar($parts[0]) ;
+                    $company = removeSpecialChar($parts[1]);
+                    $date = removeSpecialChar($parts[2]);
+                    $short = removeSpecialChar($parts[3]);
+                    $long = removeSpecialChar($parts[4]);
+                    $desired = removeSpecialChar($parts[5]);
+                    $priority = removeSpecialChar($parts[6]);
+                    $mail = removeSpecialChar($parts[7]);
+                    $filePath = removeSpecialChar($parts[8]);
+
+                    $ticketObj[] = new Ticket($title, $company, $date, $shortDesc, $longDesc, $preferredSituation, $priority, $mail, $filePath);
+                }
+            }
+        }
+
+        fclose($file);
+        return $ticketObj;
+    }
+
 
 ?>

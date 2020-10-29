@@ -41,11 +41,12 @@
         <?php require_once $basePath . 'resources/templates/layout/parts/header.php' ?>
         <!-- /header -->
 
+        <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
                 <div class="page-title">
                     <div class="title_left">
-                        <h3>Add company</h3>
+                        <h3>Add ticket</h3>
                     </div>
                 </div>
 
@@ -55,16 +56,16 @@
                     <div class="col-md-12 col-sm-12  ">
                         <div class="x_panel">
                             <div class="x_content">
-                                <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" novalidate="">
-                                    <div class="field item form-group <?php if (!$nameOk) { echo 'bad'; } ?>">
+                                <form class="" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" novalidate="">
+                                    <div class="field item form-group <?php if (!$titleOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            Name
+                                            Title
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input class="form-control" data-validate-length-range="6" name="name" placeholder="Titel" required="required" value="<?php echo htmlentities($nameValue); ?>">
+                                            <input class="form-control" data-validate-length-range="6" name="title" placeholder="Title" required="required" value="<?php echo htmlentities($titleValue); ?>">
                                         </div>
-                                        <?php if (!$nameOk) { echo '<div class="red p-2">' . $ErrName . '</div>'; } ?>
+                                        <?php if (!$titleOk) { echo '<div class="alert">' . $msgTitle . '</div>'; } ?>
                                     </div>
                                     <div class="field item form-group <?php if (!$companyOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
@@ -72,100 +73,98 @@
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select class="form-control" id="company" name="company">
-                                                <option value="<?php echo htmlentities($companyValue); ?>">Choose company</option>
-                                                <?php foreach ($companies as $company) { ?>
-                                                    <option>
-                                                        <?php echo  htmlentities($company['name']);?>
+                                            <select class="form-control" data-validate-length-range="6" name="company" required="required">
+                                                <option value="Select company" <?php if ($companyValue == 'Select company') { echo ' selected="selected"'; } ?>>Select company</option>
+                                                <?php foreach ($companyObj as $company) { ?>
+                                                    <option value="<?php echo urlencode($company->getName()); ?>" <?php if (urldecode($companyValue) == $company->getName()) { echo ' selected="selected"'; } ?>>
+                                                        <?php echo htmlentities($company->getName()); ?>
                                                     </option>
                                                 <?php } ?>
                                             </select>
                                         </div>
-                                        <?php if (!$companyOk) { echo '<div class="red p-2">' . $ErrCompany . '</div>'; } ?>
+                                        <?php if (!$companyOk) { echo '<div class="alert">' . $msgCompany . '</div>'; } ?>
                                     </div>
-                                     <div class="field item form-group <?php if (!$dateOk) { echo 'bad'; } ?>">
+                                    <div class="field item form-group <?php if (!$dateOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Date
                                             <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-2 col-sm-2">
-                                            <input type="date" id="date" name="date" value="<?php echo htmlentities($dateValue); ?>">
+                                        <div class="col-md-6 col-sm-6">
+                                            <input type="date" class="form-control" data-validate-length-range="6" name="date" placeholder="Date" required="required" value="<?php if ($dateValue !== '') { echo htmlentities($dateValue); } else { echo htmlentities($today); } ?>">
                                         </div>
-                                         <?php if (!$dateOk) { echo '<div class="red p-2">' . $ErrDate . '</div>'; } ?>
+                                        <?php if (!$dateOk) { echo '<div class="alert">' . $msgDate . '</div>'; } ?>
                                     </div>
-                                     <div class="field item form-group <?php if (!$shortOk) { echo 'bad'; } ?>">
+
+                                    <div class="field item form-group <?php if (!$shortDescOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            short description
+                                            Short description
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="short" name="short" rows="4" cols="10"></textarea>
+                                            <textarea rows="5" name="shortDesc">
+                                                <?php echo htmlentities($shortDescValue); ?>
+                                            </textarea>
                                         </div>
-                                         <?php if (!$shortOk) { echo '<div class="red p-2">' . $ErrShort . '</div>'; } ?>
+                                        <?php if (!$shortDescOk) { echo '<div class="alert">' . $msgShortDesc . '</div>'; } ?>
                                     </div>
-                                      <div class="field item form-group <?php if (!$longOk) { echo 'bad'; } ?>">
+                                    <div class="field item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
                                             Long description
-                                            <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="desired" name="long" rows="4" cols="50"></textarea>
+                                            <textarea rows="5" name="longDesc">
+                                                <?php echo htmlentities($longDescValue); ?>
+                                            </textarea>
                                         </div>
-                                          <?php if (!$longOk) { echo '<div class="red p-2">' . $ErrLong . '</div>'; } ?>
                                     </div>
-                                    <div class="field item form-group <?php if (!$desiredOk) { echo 'bad'; } ?>">
+                                    <div class="field item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            Desired situation
-                                            <span class="required">*</span>
+                                            Preferred situation
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <textarea id="desired" name="desired" rows="4" cols="50"></textarea>
+                                            <textarea rows="5" name="preferred_situation">
+                                                <?php echo htmlentities($preferredSituationValue); ?>
+                                            </textarea>
                                         </div>
-                                        <?php if (!$desiredOk) { echo '<div class="red p-2">' . $ErrDesired . '</div>'; } ?>
                                     </div>
-                                    <div class="field item form-group <?php if (!$priorOk) { echo 'bad'; } ?>">
+                                    <div class="field item form-group <?php if (!$priorityOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            priority
+                                            Priority
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select class="form-control" id="prior" name="prior">
-                                                <option value="<?php echo htmlentities($priorValue); ?>">priority</option>
-                                                <?php foreach ($priority as $prior) { ?>
-                                                <option>
-                                                    <?php echo  htmlentities($prior);?>
-                                                </option>
-                                                <?php } ?>
+                                            <select class="form-control" data-validate-length-range="6" name="priority" required="required">
+                                                <option value="select priority" <?php if ($priorityValue == 'select priority') { echo ' selected="selected"'; } ?>>Select prioirity</option>
+                                                <option value="low" <?php if ($priorityValue == 'laag') { echo ' selected="selected"'; } ?>>Low</option>
+                                                <option value="middle" <?php if ($priorityValue == 'middel') { echo ' selected="selected"'; } ?>>Middle</option>
+                                                <option value="high" <?php if ($priorityValue == 'hoog') { echo ' selected="selected"'; } ?>>High</option>
                                             </select>
                                         </div>
-                                        <?php if (!$priorOk) { echo '<div class="red p-2">' . $ErrPrior . '</div>'; } ?>
+                                        <?php if (!$priorityOk) { echo '<div class="alert">' . $msgPriority . '</div>'; } ?>
                                     </div>
-                                     <div class="field item form-group <?php if (!$emailOk) { echo 'bad'; } ?>">
+                                    <div class="field item form-group <?php if (!$mailOk) { echo 'bad'; } ?>">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            email
+                                            Manager of client
                                             <span class="required">*</span>
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input type="email" class="form-control" data-validate-length-range="6" name="email" placeholder="test@gmail.com" required="required" value="<?php echo htmlentities($emailValue); ?>">
+                                            <input class="form-control" data-validate-length-range="6" name="mail" placeholder="john.doe@example.com" required="required" value="<?php echo htmlentities($mailValue); ?>">
                                         </div>
-                                         <?php if (!$emailOk) { echo '<div class="red p-2">' . $ErrEmail . '</div>'; } ?>
+                                        <?php if (!$mailOk) { echo '<div class="alert">' . $msgMail . '</div>'; } ?>
                                     </div>
-                                      <!--<div class="field item form-group <?php if (!$fileToUploadOk) {echo 'bad'; } ?>">
+                                    <div class="field item form-group">
                                         <label class="col-form-label col-md-3 col-sm-3  label-align">
-                                            upload file
-                                            <span class="required">*</span>
+                                            File upload
                                         </label>
                                         <div class="col-md-6 col-sm-6">
-                                                Select image to upload:
-                                                <input type="file" name="fileToUpload" id="fileToUpload">
-                                                <input type="submit" value="Upload" name="submit">
+                                            <input type="file" name="file">
                                         </div>
-                                          <?php if (!$fileToUploadOk) { echo '<div class="red p-2">' . $ErrFileToUpload . '</div>'; } ?>
-                                    </div>-->
+                                        <?php if (!$fileOk) { echo '<div class="alert">' . $msgFile . '</div>'; } ?>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-md-6 offset-md-3">
-                                            <input type="hidden" name="moduleAction" value="Submit-company" />
-                                            <button type="submit" value="Save-company" class="btn btn-primary">Save</button>
+                                            <input type="hidden" name="moduleAction" value="Submit-ticket" />
+                                            <button type="submit" value="Save-ticket" class="btn btn-primary">Save</button>
                                         </div>
                                     </div>
                                 </form>
