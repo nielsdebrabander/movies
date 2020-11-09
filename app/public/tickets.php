@@ -1,7 +1,13 @@
 <?php
-
     // General variables
     $basePath = __DIR__ . '/../';
+
+    // Require composer autoloader
+    require_once $basePath . '/vendor/autoload.php';
+
+    // Bootstrapping twig pages
+    $loader = new \Twig\Loader\FilesystemLoader($basePath . 'resources/templates/');
+    $twig = new \Twig\Environment($loader);
 
     // Classes
     require_once $basePath . 'src/Models/Company.php';
@@ -89,6 +95,7 @@
             }
         }
 
+        // Create the needed directories for the upload file and the ticket file if not exists
         if (!file_exists('../resources/data/tickets')) {
             mkdir('../resources/data/tickets');
         }
@@ -116,11 +123,23 @@
             }
         }
 
+        // Check if everything is ok
         if ($ok && $fileOk) {
 
+            // Create csv file if not exists for that client
             $uploadedFilePAth = isset($_FILES['file']) ? 'resources/data/tickets/documents/' . $vatClient . '/' . $_FILES['file']['name'] : '';
             $ticket = fopen($basePath . 'resources/data/tickets/' . $vatClient . '.csv', 'a');
-            $value = [urldecode($titleValue), urldecode($companyValue), urldecode($dateValue), trim(urldecode($shortDescValue)), trim(urldecode($longDescValue)), trim(urldecode($preferredSituationValue)), urldecode($priorityValue), urldecode($mailValue), $uploadedFilePAth];
+            $value = [
+                urldecode($titleValue),
+                urldecode($companyValue),
+                urldecode($dateValue),
+                trim(urldecode($shortDescValue)),
+                trim(urldecode($longDescValue)),
+                trim(urldecode($preferredSituationValue)),
+                urldecode($priorityValue),
+                urldecode($mailValue),
+                $uploadedFilePAth
+            ];
             fputcsv($ticket, $value, ';');
 
             header('location: companies.php');
@@ -128,11 +147,40 @@
         }
     }
 
+    // Set the default date to today
     $dateTimeObj = new DateTime('today');
     $today = date_format($dateTimeObj, 'Y-m-d');
 
 
 
     // View
-    require_once $basePath . 'resources/templates/pages/tickets.php';
+    //require_once $basePath . 'resources/templates/pages/tickets.twig';
+    $tpl = $twig->load('/pages/tickets.twig');
+    echo $tpl->render(array(
+        'formAction' => $_SERVER['PHP_SELF'],
+        'okTitle' => $titleOk,
+        'persistTitle' => $titleValue,
+        'msgTitle' => $msgTitle,
+        'okCompany' => $companyOk,
+        'companyValue' => $companyValue,
+        'companyObj' => $companyObj,
+        'msgCompany' => $msgCompany,
+        'okDate' => $dateOk,
+        'dateValue' => $dateValue,
+        'today' => $today,
+        'okShortDesc' => $shortDescOk,
+        'persistShortDesc' => $shortDescValue,
+        'msgShortDesc' => $msgShortDesc,
+        'persistLongDesc' => $longDescValue,
+        'persistPrefSit' => $preferredSituationValue,
+        'okPriority' => $priorityOk,
+        'priorityValue' => $priorityValue,
+        'msgPriority' => $msgPriority,
+        'okMail' => $mailOk,
+        'persistMail' => $mailValue,
+        'msgMail' => $msgMail,
+        'okFile' => $fileOk,
+        'msgFile' => $msgFile
+    ));
+
 ?>

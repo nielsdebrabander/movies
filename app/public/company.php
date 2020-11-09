@@ -3,32 +3,90 @@
     // General variables
     $basePath = __DIR__ . '/../';
 
-    // Data
-    require_once $basePath . 'src/Models/Company.php';
-    $companies = require_once $basePath . 'resources/data/companies.php';
-    $searchTerm = $_GET['search'];
+    // Require composer autoloader
+    require_once $basePath . '/vendor/autoload.php';
 
-    function searchCompany (string $searchName, array $companies): int {
-        foreach ($companies as $key => $company) {
-            $name = $company['name'];
-            if ($searchName === $name) {
-                return $key;
-            }
-        }
-        return -1;
+    // Bootstrapping twig pages
+    $loader = new \Twig\Loader\FilesystemLoader($basePath . 'resources/templates/');
+    $twig = new \Twig\Environment($loader);
+
+    // Database connection
+    require_once $basePath . 'config/database.php';
+    $connectionParams = [
+        'host' => DB_HOST,
+        'dbname' => DB_NAME,
+        'user' => DB_USER_NAME,
+        'password' => DB_PASS,
+        'driver' => 'pdo_mysql',
+        'charset' => 'utf8mb4'
+    ];
+
+    try {
+        $connection = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
+        $result = $connection->connect();
+    }
+    catch (\Doctrine\DBAL\Exception $exception) {
+        $connection = null;
+        echo $exception;
     }
 
-    $key = searchCompany($searchTerm, $companies);
+    // Models
+    require_once $basePath . 'src/Models/Company.php';
+    require_once $basePath . 'src/Models/Tickets.php';
 
-    if ($key === -1) {
-        header('Location: ./companies.php');
-        exit();
+    // Data
+    $id = $_GET['id'];
+    $ticketObject = [];
+    $companyRecord = [];
+
+    // Functions
+    require_once $basePath . 'src/functions.php';
+
+    // Logic
+    try {
+        $stmt = $connection->prepare('SELECT * FROM companies WHERE id = ?');
+        $stmt->execute([$id]);
+        $companyRecord = $stmt->fetchAssociative();
+    }
+    catch (\Doctrine\DBAL\Exception $exception) {
+        echo $exception;
+    }
+    catch (\Doctrine\DBAL\Driver\Exception $exception) {
+        echo $exception;
+    }
+
+    $companyObject = new Company(
+        $companyRecord['id'],
+        $companyRecord['name'],
+        $companyRecord['address'],
+        $companyRecord['zip'],
+        $companyRecord['city'],
+        $companyRecord['activity'],
+        $companyRecord['vat']
+    );
+
+    if (file_exists($basePath . 'resources/data/tickets')) {
+        if (file_exists($basePath . 'resources/data/tickets/' . $companyObject->getVat() . '.csv')) {
+            $ticketObject = createTicketObj($basePath . 'resources/data/tickets/' . $companyObject->getVat() . '.csv');
+        }
+        else {
+            //echo 'No tickets found';
+        }
     }
     else {
-        $companyRecord = $companies[$key];
-        $companyObject = new Company($companyRecord['name'], $companyRecord['address'], $companyRecord['zip'], $companyRecord['city'], $companyRecord['activity'], $companyRecord['vat']);
+        //echo 'folder tickes does not exist';
     }
+
     // View
-    require_once $basePath . 'resources/templates/pages/company.php';
+    $tpl = $twig->load('/pages/company.twig');
+    echo $tpl->render(array(
+        'companyName' => $companyObject->getName(),
+        'companyAddress' => $companyObject->getAddress(),
+        'companyZip' => $companyObject->getZip(),
+        'companyCity' => $companyObject->getCity(),
+        'companyVat' => $companyObject->getVat(),
+        'companyActivity' => $companyObject->getActivity(),
+        'tickets' => $ticketObject
+    ));
 
-
+?>
