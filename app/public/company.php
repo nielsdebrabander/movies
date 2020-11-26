@@ -80,6 +80,7 @@
     // View
     $tpl = $twig->load('/pages/company.twig');
     echo $tpl->render(array(
+
         'companyName' => $companyObject->getName(),
         'companyAddress' => $companyObject->getAddress(),
         'companyZip' => $companyObject->getZip(),

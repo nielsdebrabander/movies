@@ -211,7 +211,7 @@
             $activity = $company['activity'];
             $vat = $company['vat'];
 
-            $companyObj[] = new Company($name, $address, $zip, $city, $vat, $activity);
+            $companyObj[] = new Company( $name, $address, $zip, $city, $activity, $vat);
         }
 
         return $companyObj;
@@ -258,7 +258,7 @@
                     $mail = removeSpecialChar($parts[7]);
                     $filePath = removeSpecialChar($parts[8]);
 
-                    $ticketObj[] = new Ticket($title, $company, $date, $shortDesc, $longDesc, $preferredSituation, $priority, $mail, $filePath);
+                    $ticketObj[] = new Ticket($title, $company, $date, $short, $long, $desired, $priority, $mail, $filePath);
                 }
             }
         }
