@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ var }}</title>
+    <title></title>
 
     <!-- Bootstrap -->
     <link href="/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -40,21 +40,24 @@
             <section class="login_content">
                 <form action="/login" method="post">
                     <h1>Login Form</h1>
-                    <div class="error">
-                        <p class="red">There might something wrong with your e-mailadress and/or password</p>
+
+                    {% if not ok %}
+                        <div class="error">
+                            <p class="red">{{ message }}</p>
+                        </div>
+                    {% endif %}
+                    <div>
+                        <input type="text" class="form-control" placeholder="E-mailadress" name="email" required="" value="{{ email }}"/>
                     </div>
                     <div>
-                        <input type="text" class="form-control" placeholder="E-mailadress" name="email" required="" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                        <input type="password" class="form-control" placeholder="Password" name="password" required=""/>
                     </div>
                     <div class="text-left">
                         <input type="checkbox" id="remember" name="remember">
                         <label for="remember">Remember my e-mailaddress</label>
                     </div>
                     <div>
-                        <input type="hidden" name="moduleAction" value="login" />
+                        <input type="hidden" name="moduleAction" value="login"/>
                         <input type="submit" class="btn btn-default submit" value="Login">
                         <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
@@ -64,25 +67,27 @@
                             <a href="#signup" class="to_register"> Create Account </a>
                         </p>
                         <div class="clearfix"></div>
-                        <br />
+                        <br/>
                     </div>
                 </form>
             </section>
         </div>
+
         <div id="register" class="animate form registration_form">
             <section class="login_content">
                 <form action="/register" method="post">
                     <h1>Create Account</h1>
                     <div>
-                        <input type="email" class="form-control" placeholder="Email" name="email" required="" />
+                        <input type="email" class="form-control" placeholder="Email" name="email" required=""/>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" name="password" required="" />
+                        <input type="password" class="form-control" placeholder="Password" name="password" required=""/>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" name="confirm_password" required="" />
+                        <input type="password" class="form-control" placeholder="Password" name="confirm_password" required=""/>
                     </div>
                     <div>
+                        <input type="hidden" name="moduleAction" value="login">
                         <input type="submit" class="btn btn-default submit" value="Register">
                     </div>
                     <div class="clearfix"></div>
@@ -91,7 +96,7 @@
                             <a href="#signin" class="to_register"> Log in </a>
                         </p>
                         <div class="clearfix"></div>
-                        <br />
+                        <br/>
                     </div>
                 </form>
             </section>

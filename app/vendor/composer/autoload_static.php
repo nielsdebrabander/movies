@@ -67,6 +67,7 @@ class ComposerStaticInitbc66f18f23327f34f23579ea8533a33a
     );
 
     public static $classMap = array (
+        'AutController' => __DIR__ . '/../..' . '/src/controllers/AutController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 

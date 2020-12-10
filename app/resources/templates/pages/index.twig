@@ -33,13 +33,18 @@
 <body class="nav-md">
 <div class="container body">
     <div class="main_container">
-        <!-- sidebar -->
-        <?php require_once $basePath . 'resources/templates/layout/parts/sidebar.twig'?>
-        <!-- /sidebar -->
+        {% block sidebar %}
+            <!-- sidebar -->
+            {% include 'layout/parts/sidebar.twig' %}
+            <!-- /sidebar -->
+        {% endblock %}
 
-        <!-- header -->
-        <?php require_once  $basePath . 'resources/templates/layout/parts/header.twig'?>
-        <!-- /header -->
+        {% block header %}
+            <!-- header -->
+            {% include 'layout/parts/header.twig' %}
+            <!-- /header -->
+        {% endblock %}
+
 
         <!-- page content -->
         <div class="right_col" role="main">
