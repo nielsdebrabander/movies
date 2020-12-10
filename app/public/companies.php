@@ -1,6 +1,6 @@
 <?php
 
-    // General variables
+   /* // General variables
     $basePath = __DIR__ . '/../';
 
     // Require composer autoloader
@@ -303,10 +303,10 @@
         $companyCities[] = $city['city'];
     }
 
-    sort($companyCities);
+    sort($companyCities);*/
 
     // View
-    $tpl = $twig->load('/pages/companies.twig');
+   /* $tpl = $twig->load('/pages/companies.twig');
     echo $tpl->render(array(
         'formAction' => $_SERVER['PHP_SELF'],
         'okTerm' => $okTerm,
@@ -322,6 +322,6 @@
         'errorMessageProvince' => $msgProvince,
         'companyObject' => $companyObject,
         'contactObject' => $contactObject
-    ));
+    ));*/
 
 ?>

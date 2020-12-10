@@ -1,6 +1,6 @@
 <?php
 
-    // General variables
+  /*  // General variables
     $basePath = __DIR__ . '/../';
 
     // Require composer autoloader
@@ -75,10 +75,10 @@
     }
     else {
         //echo 'folder tickes does not exist';
-    }
+    }*/
 
     // View
-    $tpl = $twig->load('/pages/company.twig');
+   /* $tpl = $twig->load('/pages/company.twig');
     echo $tpl->render(array(
 
         'companyName' => $companyObject->getName(),
@@ -88,6 +88,6 @@
         'companyVat' => $companyObject->getVat(),
         'companyActivity' => $companyObject->getActivity(),
         'tickets' => $ticketObject
-    ));
+    ));*/
 
 ?>
