@@ -157,13 +157,13 @@
                                                     <td class=" ">{{ value.getVat() }}</td>
                                                     <td class=" ">{{ value.getActivity() }}</td>
                                                     <td class=" last">
-                                                        <a href="company.php?id={{ value.getId()|url_encode }}">View</a>
+                                                        <a href="/dashboard/companies/?id={{ value.getId()|url_encode }}">View</a>
                                                     </td>
                                                     <td class=" last">
-                                                        <a href="edit-company.php?id={{ value.getId()|url_encode }}">Edit</a>
+                                                        <a href="/dashboard/companies/?id={{ value.getId()|url_encode }}">Edit</a>
                                                     </td>
                                                     <td class=" last">
-                                                        <a href="delete-company.php?id={{ value.getId()|url_encode }}">Delete</a>
+                                                        <a href="/dashboard/companies/?id={{ value.getId()|url_encode }}">Delete</a>
                                                     </td>
                                                 </tr>
                                             {% endfor %}

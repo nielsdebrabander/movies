@@ -5,8 +5,9 @@
 
     // Require composer autoloader
     require_once $basePath . '/vendor/autoload.php';
-    require_once $basePath . '/src/controllers/AutController.php';
+    require_once $basePath . '/src/controllers/AuthController.php';
     require_once $basePath . '/src/controllers/HomeController.php';
+    require_once $basePath . '/src/controllers/CompaniesController.php';
 
     // Create Router instance
     $router = new \Bramus\Router\Router();
@@ -16,41 +17,66 @@
         session_start();
     });
 
+    // Define routes
+    /*
+     *  Go always to the home route when you go to the root.
+     */
     $router->get('/', function () {
         header('Location: /home');
         exit();
     });
     $router->get('/home', 'HomeController@showHome');
-    $router->get('/login', 'AuthController@showLogin');
-    $router->post('/register', 'AuthController@register');
-    $router->post('/logout', 'AuthController@logout');
 
-    $router->before('GET|POST', '/dashboard.*', function(){
-        if(!isset($_SESSION['user'])){
-            header('Location: /login');
+    /*
+     *  Check if user is already logged in.
+     */
+    $router->before('GET|POST', '/login', function () {
+        if (isset($_SESSION['user'])) {
+            header('Location: /dashboard/companies');
             exit();
         }
     });
+    $router->get('/login', 'AuthController@showLogin');
+    $router->post('/login', 'AuthController@login');
+    $router->post('/logout', 'AuthController@logout');
 
-    $router->mount('/dashboard', function()use($router){
-        $router->get('/companies', 'CompanyController@overview');
-        $router->get('/companies/(\w+)', 'CompanyController@detail');
+    /*
+     *  Secured pages under the route /dashboard
+     */
+    $router->mount('/dashboard', function () use ($router) {
+        /*
+         *  Go always to the companies page if you go to the /dashboard route.
+         */
+        $router->get('/', function () {
+            header('Location: /dashboard/companies');
+            exit();
+        });
 
-        $router->get('/companies/create', 'CompanyController@showCreate');
-        $router->post('/companies/create', 'CompanyController@create');
-        $router->get('/companies/(\w+)/update', 'CompanyController@showEdit');
-        $router->post('/companies/(\w+)/update', 'CompanyController@edit');
-        $router->get('/companies/create', 'CompanyController@showCreate');
-        $router->post('/companies/create', 'CompanyController@create');
+        /*
+         *  Only show the companies page if you are logged in.
+         */
+        $router->before('GET|POST', '/companies', function () use ($router) {
+            if (!isset($_SESSION['user'])) {
+                header('Location: /login');
+                exit();
+            }
+        });
 
-        $router->get('/contacts', 'CompanyController@contacts');
-        $router->get('/contacts/(\w+)', 'CompanyController@contactDetail');
+        $router->get('/companies', 'CompaniesController@overview');
+        $router->get('/companies/(\d+)', 'CompaniesController@detail');
 
+        $router->get('/companies/create', 'CompaniesController@showCreate');
+        $router->post('/companies/create', 'CompaniesController@create');
+        $router->get('/companies/(\d+)/update', 'CompaniesController@showUpdate');
+        $router->post('/companies/(\d+)/update', 'CompaniesController@update');
+        $router->get('/companies/(\d+)/delete', 'CompaniesController@showDelete');
+        $router->post('/companies/(\d+)/delete', 'CompaniesController@delete');
     });
 
     // RUN THE ROUTER
     $router->run();
 
 ?>
+
 
 

@@ -67,8 +67,10 @@ class ComposerStaticInitbc66f18f23327f34f23579ea8533a33a
     );
 
     public static $classMap = array (
-        'AutController' => __DIR__ . '/../..' . '/src/controllers/AutController.php',
+        'AuthController' => __DIR__ . '/../..' . '/src/controllers/AuthController.php',
+        'CompaniesController' => __DIR__ . '/../..' . '/src/controllers/CompaniesController.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+        'HomeController' => __DIR__ . '/../..' . '/src/controllers/HomeController.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
